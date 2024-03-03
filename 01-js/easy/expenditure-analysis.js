@@ -14,7 +14,28 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  // Create an empty object to store total spent for each category
+  let categoryTotal = {};
+
+  // Iterate over all transactions using forEach loop
+  transactions.forEach(transaction => {
+    // Check if the category already exists in the categoryTotal object
+    if (categoryTotal.hasOwnProperty(transaction.category)) {
+      // If category exists, add the price of the transaction to its total
+      categoryTotal[transaction.category] += transaction.price;
+    } else {
+      // If category doesn't exist, initialize it with the price of the transaction
+      categoryTotal[transaction.category] = transaction.price;
+    }
+  });
+
+  // Convert categoryTotal object into an array of objects
+  let result = [];
+  for (let category in categoryTotal) {
+    result.push({ category: category, totalSpent: categoryTotal[category] });
+  }
+
+  return result;
 }
 
 module.exports = calculateTotalSpentByCategory;

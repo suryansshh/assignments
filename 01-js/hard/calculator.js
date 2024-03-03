@@ -16,6 +16,58 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Calculator {}
+class Calculator {
+  constructor() {
+    this.result = 0;
+  }
+
+  add(number) {
+    this.result += number;
+    return this.result;
+  }
+
+  subtract(number) {
+    this.result -= number;
+    return this.result;
+  }
+
+  multiply(number) {
+    this.result *= number;
+    return this.result;
+  }
+
+  divide(number) {
+    if (number === 0) {
+      throw new Error('Division by zero');
+    }
+    this.result /= number;
+    return this.result;
+  }
+
+  clear() {
+    this.result = 0;
+    return this.result;
+  }
+
+  getResult() {
+    return this.result;
+  }
+
+  calculate(expression) {
+    let express = expression.replace(/\s/g, ""); // Remove all whitespace
+    // Validate if expression contains only numbers, arithmetic operators, and parentheses
+    if (!/^[0-9+\-*\/.()]+$/.test(express)) {
+      throw new Error('Invalid expression: Expression contains non-numerical characters');
+    }
+    // Check for division by zero
+    if (express.includes('/0')) {
+      throw new Error('Division by zero');
+    }
+    // Evaluate the expression using JavaScript's eval function
+    this.result = eval(express);
+    return this.result;
+  }
+  
+}
 
 module.exports = Calculator;
