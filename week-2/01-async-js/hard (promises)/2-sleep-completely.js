@@ -4,7 +4,14 @@
  * the function should return a promise just like before
  */
 
+const { resolve } = require("path");
+
 function sleep(milliseconds) {
+    return new Promise((resolve, reject) => {
+        setTimeout(resolve, milliseconds);
+    });
 }
 
 module.exports = sleep;
+
+
